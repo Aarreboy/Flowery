@@ -1,5 +1,6 @@
 package com.example.myapplication.view
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,10 +23,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.R
+import com.example.myapplication.viewmodel.PlantViewModel
+import androidx.compose.ui.platform.LocalContext
+
 
 @Composable
-fun ManagePlants(onBack: () -> Unit, onPlant: () -> Unit) {
-    Surface(
+fun ManagePlants(onBack: () -> Unit, viewModel: PlantViewModel)
+ {
+     val context = LocalContext.current
+     Surface(
         color = Color(231, 239, 199),
         modifier = Modifier.fillMaxSize()
     ) {
@@ -47,14 +53,21 @@ fun ManagePlants(onBack: () -> Unit, onPlant: () -> Unit) {
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = onPlant,
-                colors =  ButtonDefaults.buttonColors(Color(1, 59, 26))) {
-                Text("Plant")
-            }
             Button(onClick = onBack,
                 colors =  ButtonDefaults.buttonColors(Color(59, 59, 26))) {
                 Text("Go back")
             }
+
+            Button(
+                onClick = {
+                    Toast.makeText(context, "Planted a new Rose 🌹!", Toast.LENGTH_SHORT).show()
+                    viewModel.addPlant("Rose 🌹") // You can later ask for custom name input
+                },
+                colors = ButtonDefaults.buttonColors(Color(1, 59, 26))
+            ) {
+                Text("Plant")
+            }
+
         }
     }
 }

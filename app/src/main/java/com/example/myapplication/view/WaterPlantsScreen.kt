@@ -22,9 +22,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.R
+import com.example.myapplication.viewmodel.PlantViewModel
 
 @Composable
-fun WaterPlants(onBack: () -> Unit) {
+fun WaterPlants(onBack: () -> Unit, viewModel: PlantViewModel) {
+    val plants = viewModel.plants
     Surface(
         color = Color(231, 239, 199),
         modifier = Modifier.fillMaxSize()
@@ -41,11 +43,28 @@ fun WaterPlants(onBack: () -> Unit) {
                 contentScale = ContentScale.Fit
             )
 
-            Text("Wanna Water some flowers? Cant yet!",
+            Text(
+                "Your Plants 🌱",
                 color = Color(59, 59, 26),
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold)
+                fontWeight = FontWeight.Bold
+            )
+
             Spacer(modifier = Modifier.height(16.dp))
+
+            if (plants.isEmpty()) {
+                Text("No plants yet!", color = Color.DarkGray)
+            } else {
+                plants.forEach { plant ->
+                    Text(
+                        text = "🌼 ${plant.name}",
+                        fontSize = 18.sp,
+                        modifier = Modifier.padding(4.dp)
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
             Button(onClick = onBack,
                 colors =  ButtonDefaults.buttonColors(Color(59, 59, 26))) {
                 Text("Go back")
