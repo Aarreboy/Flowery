@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                             onNavigate = { route -> navController.navigate(route) }
                         )
                     }
-                    composable("second") {
+                    composable("ManagePlants") {
                         ManagePlants(
                             onBack = { navController.popBackStack() },
                             onPlant = { Toast.makeText(this@MainActivity, "Planted a new flower!", Toast.LENGTH_SHORT).show() }
@@ -90,7 +90,7 @@ fun GreetingScreen(onNavigate: (String) -> Unit){
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = {onNavigate("second") },
+            Button(onClick = {onNavigate("ManagePlants") },
                 colors =  ButtonDefaults.buttonColors(Color(59, 59, 26))) {
                 Text("Add/Remove Plants")
             }
