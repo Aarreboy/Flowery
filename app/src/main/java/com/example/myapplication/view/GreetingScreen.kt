@@ -46,7 +46,7 @@ fun GreetingScreen(onNavigate: (String) -> Unit) {
                 onClick = { onNavigate("ManagePlants") },
                 colors = ButtonDefaults.buttonColors(Color(59, 59, 26))
             ) {
-                Text("Add/Remove Plants")
+                Text("Add Plants")
             }
             Button(
                 onClick = { onNavigate("WaterPlants") },
