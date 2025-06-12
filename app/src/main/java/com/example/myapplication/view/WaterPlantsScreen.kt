@@ -1,5 +1,6 @@
 package com.example.myapplication.view
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,16 +18,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.R
 import com.example.myapplication.viewmodel.PlantViewModel
+import com.example.myapplication.utils.timeAgo
+
+
 
 @Composable
 fun WaterPlants(onBack: () -> Unit, viewModel: PlantViewModel) {
     val plants = viewModel.plants
+    val context = LocalContext.current
     Surface(
         color = Color(231, 239, 199),
         modifier = Modifier.fillMaxSize()
@@ -56,11 +62,28 @@ fun WaterPlants(onBack: () -> Unit, viewModel: PlantViewModel) {
                 Text("No plants yet!", color = Color.DarkGray)
             } else {
                 plants.forEach { plant ->
-                    Text(
-                        text = "🌼 ${plant.name}",
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(4.dp)
-                    )
+                    Column(
+                        modifier = Modifier.padding(8.dp)
+                    ){
+                        Text(
+                            text = "🌼 ${plant.name}",
+                            fontSize = 18.sp,
+                        )
+                        Text(
+                            text = "Last Watered : ${timeAgo(plant.lastWatered)}",
+                            fontSize = 14.sp,
+                            color = Color.DarkGray
+                        )
+                        Button(
+                            onClick = {
+                                viewModel.waterPlant(plant)
+                                Toast.makeText(context, "Watered ${plant.name}", Toast.LENGTH_SHORT).show()
+                            },
+                            colors = ButtonDefaults.buttonColors(Color(1, 59, 26))
+                        ){
+                            Text("Water")
+                        }
+                    }
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))

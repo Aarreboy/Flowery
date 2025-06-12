@@ -8,6 +8,9 @@ class PlantViewModel : ViewModel() {
     val plants: List<Plant> = _plants
 
     fun addPlant(name: String) {
-        _plants.add(Plant(name))
+        _plants.add(Plant(name = name, lastWatered = System.currentTimeMillis()))    }
+
+    fun waterPlant(plant: Plant) {
+        plant.lastWatered = System.currentTimeMillis()
     }
 }
