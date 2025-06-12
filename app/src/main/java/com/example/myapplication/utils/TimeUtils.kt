@@ -14,6 +14,6 @@ fun timeAgo(timestamp: Long): String {
     }
 }
 fun formatLastWatered(timestamp: Long): String {
-    val sdf = SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.getDefault())
+    val sdf = SimpleDateFormat("MMM dd, yyyy 'at' HH:mm", Locale.getDefault())
     return sdf.format(Date(timestamp))
 }
