@@ -28,8 +28,7 @@ import com.example.myapplication.R
 import com.example.myapplication.viewmodel.PlantViewModel
 import com.example.myapplication.utils.timeAgo
 import androidx.compose.foundation.lazy.items
-
-
+import com.example.myapplication.utils.formatLastWatered
 
 
 @Composable
@@ -92,7 +91,7 @@ fun WaterPlants(onBack: () -> Unit, viewModel: PlantViewModel) {
                 ) {
                     Text("🌼 ${plant.name}", fontSize = 18.sp)
                     Text(
-                        "Last Watered : ${timeAgo(plant.lastWatered)}",
+                        "Last Watered : ${formatLastWatered(plant.lastWatered)}",
                         fontSize = 14.sp,
                         color = Color.DarkGray
                     )
