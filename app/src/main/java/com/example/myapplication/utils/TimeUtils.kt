@@ -1,5 +1,9 @@
 package com.example.myapplication.utils
 
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 fun timeAgo(timestamp: Long): String {
     val diff = System.currentTimeMillis() - timestamp
     val minutes = diff / (1000 * 60)
@@ -8,4 +12,8 @@ fun timeAgo(timestamp: Long): String {
         minutes < 60 -> "$minutes minutes ago"
         else -> "${minutes / 60} hours ago"
     }
+}
+fun formatLastWatered(timestamp: Long): String {
+    val sdf = SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.getDefault())
+    return sdf.format(Date(timestamp))
 }
